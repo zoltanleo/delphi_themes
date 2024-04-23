@@ -2,66 +2,66 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 343
-  ClientWidth = 447
+  ClientHeight = 384
+  ClientWidth = 503
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  OnClose = FormClose
   OnCreate = FormCreate
   TextHeight = 13
-  object Label1: TLabel
-    Left = 8
-    Top = 67
-    Width = 31
-    Height = 13
-    Caption = 'Label1'
-  end
-  object cbbThemesList: TComboBox
-    Left = 8
-    Top = 16
-    Width = 431
-    Height = 21
-    Style = csDropDownList
-    DropDownCount = 20
-    Sorted = True
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 503
+    Height = 41
+    Align = alTop
+    Caption = 'Panel1'
     TabOrder = 0
-    OnChange = cbbThemesListChange
+    DesignSize = (
+      503
+      41)
+    object cbbThemesList: TComboBox
+      Left = 8
+      Top = 8
+      Width = 483
+      Height = 21
+      Style = csDropDownList
+      Anchors = [akLeft, akTop, akRight]
+      DropDownCount = 20
+      Sorted = True
+      TabOrder = 0
+      OnChange = cbbThemesListChange
+    end
   end
-  object Button1: TButton
-    Left = 364
-    Top = 310
-    Width = 75
-    Height = 25
-    Caption = 'Button1'
+  object Panel2: TPanel
+    Left = 0
+    Top = 41
+    Width = 503
+    Height = 343
+    Align = alClient
+    Caption = 'Panel2'
     TabOrder = 1
-    OnClick = Button1Click
-  end
-  object CheckBox1: TCheckBox
-    Left = 8
-    Top = 102
-    Width = 97
-    Height = 17
-    Caption = 'CheckBox1'
-    TabOrder = 2
-  end
-  object RadioButton1: TRadioButton
-    Left = 8
-    Top = 133
-    Width = 113
-    Height = 17
-    Caption = 'RadioButton1'
-    TabOrder = 3
-  end
-  object Memo1: TMemo
-    Left = 176
-    Top = 43
-    Width = 263
-    Height = 261
-    Lines.Strings = (
-      'Memo1')
-    TabOrder = 4
+    object Panel3: TPanel
+      AlignWithMargins = True
+      Left = 11
+      Top = 11
+      Width = 487
+      Height = 320
+      Margins.Left = 10
+      Margins.Top = 10
+      Margins.Right = 10
+      Margins.Bottom = 20
+      Align = alClient
+      Caption = 'Panel3'
+      TabOrder = 0
+      ExplicitLeft = 256
+      ExplicitTop = 152
+      ExplicitWidth = 185
+      ExplicitHeight = 41
+    end
   end
 end
