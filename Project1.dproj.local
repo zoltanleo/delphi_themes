@@ -1,10 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.849,=C:\proj\delphi_themes\skins\theme_obsidian.png</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.855,=C:\proj\delphi_themes\skins\theme_silver.png</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.881,=C:\proj\delphi_themes\skins\theme_windows10_blue.png</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.916,=C:\proj\delphi_themes\skins\theme_windows11_light.png</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.802,C:\proj\test_delphi\10_themes\Unit1.pas=C:\proj\test_delphi\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.903,=C:\proj\delphi_themes\skins\theme_windows11_dark.png</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.075,C:\proj\test_delphi\10_themes\Project1.dproj=C:\proj\test_delphi\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.863,=C:\proj\delphi_themes\skins\theme_smokey_quatz_kamri.png</Transaction>
     <Transaction>1899.12.30 00:00:00.000.665,=C:\proj\delphi_themes\Unit2.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.802,C:\proj\test_delphi\Unit1.dfm=C:\proj\test_delphi\10_themes\Unit1.dfm</Transaction>
     <Transaction>1899.12.30 00:00:00.000.999,=C:\proj\test_delphi\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.802,C:\proj\test_delphi\Unit1.pas=C:\proj\test_delphi\10_themes\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.075,C:\proj\test_delphi\Project1.dproj=C:\proj\test_delphi\10_themes\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.892,=C:\proj\delphi_themes\skins\theme_windows10_SlateGray.png</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.840,=C:\proj\delphi_themes\skins\theme_light.png</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.871,=C:\proj\delphi_themes\skins\theme_windows10.png</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.802,C:\proj\test_delphi\10_themes\Unit1.dfm=C:\proj\test_delphi\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.844,=C:\proj\delphi_themes\skins\theme_luna.png</Transaction>
   </Transactions>
 </BorlandProject>

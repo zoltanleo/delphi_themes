@@ -1,37 +1,42 @@
 ﻿[Closed Files]
-File_0=TSourceModule,'c:\program files (x86)\embarcadero\studio\22.0\SOURCE\VCL\Vcl.Themes.pas',0,1,1737,1,1753,0,0,,
-File_1=TSourceModule,'c:\program files (x86)\embarcadero\studio\21.0\SOURCE\VCL\Vcl.Themes.pas',0,1,196,1,1,0,0,,
-File_2=TSourceModule,'C:\proj\armdoc_4\uFrmMicUrBactInoc.pas',0,1,519,1,394,0,0,{{32,0}
-File_3=TSourceModule,'C:\proj\armdoc_4\UFrmUrethBactInoc.pas',0,1,345,1,359,0,0,{{33,0}
-File_4=TSourceModule,'C:\proj\armdoc_4\StatusPatUnit.pas',0,1,12862,1,12877,0,0,{{57,2}
-File_5=TSourceModule,'C:\proj\armdoc_4\DMFIBUnit.pas',0,1,1,1,1,0,0,,
-File_6=TSourceModule,'C:\proj\armdoc_4\MainAndrUnit.pas',0,1,126,1,138,0,0,{{166,2}
-File_7=TSourceModule,'C:\proj\armdoc_4\uFrmUrinBactInoc.pas',0,1,316,53,320,0,0,,
-File_8=TSourceModule,'C:\proj\armdoc_4\uFrmProstBactInoc.pas',0,1,656,33,661,0,0,{{32,0}
-File_9=TSourceModule,'c:\program files (x86)\embarcadero\studio\21.0\SOURCE\RTL\SYS\System.pas',0,1,1,1,12,0,0,,
-File_10=TSourceModule,'C:\proj\armdoc_4\BloodHormUnit.pas',0,1,369,1,383,0,0,{{30,2}
-File_11=TSourceModule,'C:\proj\test_delphi\07\UFrmUrethBactInoc.pas',0,1,659,58,667,0,0,{{32,0}
-File_12=TSourceModule,'C:\proj\armdoc_4\SpermGrUnit.pas',0,1,31,5,196,0,0,{{33,2}
-File_13=TSourceModule,'C:\proj\armdoc_4\uImgTemplateSingleFotos.pas',0,1,194,1,29,0,0,,{0
-File_14=TSourceModule,'C:\proj\armdoc_4\uImgSpermVitalFotos.pas',0,1,1,25,1,0,0,,
+File_0=TSourceModule,'c:\program files (x86)\embarcadero\studio\22.0\SOURCE\VCL\Vcl.Styles.pas',0,1,4,1,23,0,0,,
+File_1=TSourceModule,'c:\program files (x86)\embarcadero\studio\22.0\source\rtl\common\System.Generics.Collections.pas',0,1,232,1,10,0,0,,
+File_2=TSourceModule,'c:\program files (x86)\embarcadero\studio\22.0\SOURCE\VCL\Vcl.Themes.pas',0,1,6106,1,6120,0,0,,
+File_3=TSourceModule,'C:\emba\vcl-styles-utils\Common\Vcl.Styles.Ext.pas',0,1,573,18,593,0,0,{{111,0}
+File_4=TSourceModule,'c:\program files (x86)\embarcadero\studio\22.0\source\rtl\common\System.IOUtils.pas',0,1,49,1,10,0,0,,
+File_5=TSourceModule,'c:\program files (x86)\embarcadero\studio\22.0\SOURCE\VCL\Vcl.Forms.pas',0,1,4151,1,4165,0,0,{{1990,4}
+File_6=TSourceModule,'C:\proj\delphi_themes\Unit2.pas',0,1,42,1,49,0,0,,
+File_7=TSourceModule,'c:\program files (x86)\embarcadero\studio\21.0\SOURCE\VCL\Vcl.Themes.pas',0,1,196,1,1,0,0,,
+File_8=TSourceModule,'C:\proj\armdoc_4\uFrmMicUrBactInoc.pas',0,1,519,1,394,0,0,{{32,0}
+File_9=TSourceModule,'C:\proj\armdoc_4\UFrmUrethBactInoc.pas',0,1,345,1,359,0,0,{{33,0}
+File_10=TSourceModule,'C:\proj\armdoc_4\StatusPatUnit.pas',0,1,12862,1,12877,0,0,{{57,2}
+File_11=TSourceModule,'C:\proj\armdoc_4\DMFIBUnit.pas',0,1,1,1,1,0,0,,
+File_12=TSourceModule,'C:\proj\armdoc_4\MainAndrUnit.pas',0,1,126,1,138,0,0,{{166,2}
+File_13=TSourceModule,'C:\proj\armdoc_4\uFrmUrinBactInoc.pas',0,1,316,53,320,0,0,,
+File_14=TSourceModule,'C:\proj\armdoc_4\uFrmProstBactInoc.pas',0,1,656,33,661,0,0,{{32,0}
 
 [Modules]
-Module0=C:\proj\delphi_themes\Unit2.pas
+Module0=C:\emba\vcl-styles-utils\Demos\Vcl Styles Preview (Demo App)\uMain.pas
 Module1=C:\proj\delphi_themes\Unit1.pas
-Count=2
+Module2=C:\proj\delphi_themes\Vcl.Styles.Ext.pas
+Count=3
 EditWindowCount=1
 
-[C:\proj\delphi_themes\Unit2.pas]
+[C:\emba\vcl-styles-utils\Demos\Vcl Styles Preview (Demo App)\uMain.pas]
 ModuleType=TSourceModule
 
 [C:\proj\delphi_themes\Unit1.pas]
 ModuleType=TSourceModule
 
+[C:\proj\delphi_themes\Vcl.Styles.Ext.pas]
+ModuleType=TSourceModule
+
 [EditWindow0]
-ViewCount=2
-CurrentEditView=C:\proj\delphi_themes\Unit2.pas
+ViewCount=3
+CurrentEditView=C:\emba\vcl-styles-utils\Demos\Vcl Styles Preview (Demo App)\uMain.pas
 View0=0
 View1=1
+View2=2
 PercentageSizes=1
 Create=1
 Visible=1
@@ -64,28 +69,38 @@ TabDockRightClients=DockSite2=0,DockSite4=1
 [View0]
 CustomEditViewType=TEditView
 Module=C:\proj\delphi_themes\Unit1.pas
-CursorX=5
-CursorY=69
-TopLine=42
+CursorX=32
+CursorY=106
+TopLine=89
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=Borland.FormDesignerView
+EditViewName=C:\proj\delphi_themes\Unit1.pas
 
 [View1]
 CustomEditViewType=TEditView
-Module=C:\proj\delphi_themes\Unit2.pas
-CursorX=1
-CursorY=1
-TopLine=1
+Module=C:\emba\vcl-styles-utils\Demos\Vcl Styles Preview (Demo App)\uMain.pas
+CursorX=18
+CursorY=93
+TopLine=100
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=Borland.FormDesignerView
+EditViewName=C:\emba\vcl-styles-utils\Demos\Vcl Styles Preview (Demo App)\uMain.pas
+
+[View2]
+CustomEditViewType=TEditView
+Module=C:\proj\delphi_themes\Vcl.Styles.Ext.pas
+CursorX=1
+CursorY=73
+TopLine=116
+LeftCol=1
+Elisions={{99,0},{102,11},{'Documentation'}}{{111,0},{114,11},{'Documentation'}}{{116,0},{119,11},{'Documentation'}}{{121,0},{124,11},{'Documentation'}}{{126,0},{129,11},{'Documentation'}}{{131,0},{134,11},{'Documentation'}}{{186,0},{189,11},{'Documentation'}}{{191,0},{194,11},{'Documentation'}}{{198,0},{201,11},{'Documentation'}}{{203,0},{206,11},{'Documentation'}}{{208,0},{211,11},{'Documentation'}}{{214,0},{217,11},{'Documentation'}}
+Bookmarks=
+EditViewName=C:\proj\delphi_themes\Vcl.Styles.Ext.pas
 
 [Watches]
-Count=1
-Watch0='TStyleManager.StyleNames[i]',256,0,18,1,0,'Watches',1
+Count=0
 
 [WatchWindow]
 WatchColumnWidth=120
@@ -162,8 +177,8 @@ Create=1
 Visible=0
 Docked=1
 State=0
-Left=0
-Top=0
+Left=10
+Top=1020
 Width=2771
 Height=1728
 MaxLeft=-1
@@ -183,12 +198,12 @@ Docked=1
 State=0
 Left=0
 Top=0
-Width=2490
-Height=9097
+Width=2396
+Height=8641
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=2490
-ClientHeight=9097
+ClientWidth=2396
+ClientHeight=8641
 TBDockHeight=7223
 LRDockWidth=2000
 Dockable=1
@@ -200,8 +215,8 @@ Create=1
 Visible=0
 Docked=1
 State=0
-Left=0
-Top=0
+Left=-17
+Top=320
 Width=276
 Height=369
 MaxLeft=-1
@@ -235,11 +250,6 @@ LRDockWidth=2370
 Dockable=1
 StayOnTop=0
 SplitPos=111
-
-[PropInspDesignerSelection]
-ArrangeBy=Name
-SelectedItem=Anchors.akBottom,
-ExpandedItems=Anchors=1,BorderIcons=0,Constraints=0,CustomTitleBar=0,Font=0,LiveBindings=0,"LiveBindings Designer=0",Margins=1,StyleElements=0,Touch=0,BevelEdges=0,HeaderFont=0,Padding=0
 
 [DebugLogView]
 PercentageSizes=1
@@ -403,8 +413,8 @@ Create=1
 Visible=0
 Docked=1
 State=0
-Left=-47
-Top=-293
+Left=-10
+Top=-155
 Width=1849
 Height=3175
 MaxLeft=-1
@@ -487,8 +497,8 @@ Create=1
 Visible=0
 Docked=1
 State=0
-Left=0
-Top=0
+Left=384
+Top=803
 Width=2854
 Height=3243
 MaxLeft=-1
@@ -618,8 +628,8 @@ Create=1
 Visible=0
 Docked=1
 State=0
-Left=8
-Top=8
+Left=10
+Top=1020
 Width=3823
 Height=1437
 MaxLeft=-1
@@ -642,8 +652,8 @@ Create=1
 Visible=0
 Docked=1
 State=0
-Left=8
-Top=8
+Left=1408
+Top=155
 Width=2490
 Height=9097
 MaxLeft=-1
@@ -696,8 +706,8 @@ Width=2490
 Height=9097
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=2490
-ClientHeight=9097
+ClientWidth=2396
+ClientHeight=8641
 TBDockHeight=9097
 LRDockWidth=2490
 Dockable=1
