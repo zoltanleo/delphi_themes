@@ -1,4 +1,4 @@
-// **************************************************************************************************
+﻿// **************************************************************************************************
 //
 // Unit Vcl.Styles.Ext
 // unit for the VCL Styles Utils
@@ -18,6 +18,8 @@
 // Portions created by Rodrigo Ruz V. are Copyright (C) 2012-2023 Rodrigo Ruz V.
 // All Rights Reserved.
 //
+// By the user Zoltanleo (https://github.com/zoltanleo ) some changes have been made to the display
+// of the preview form
 // **************************************************************************************************
 unit Vcl.Styles.Ext;
 
@@ -1572,14 +1574,54 @@ begin
 end;
 
 procedure TVclStylesPreview.Paint;
+const
+  cFile = 'Файл';
+  cEdit = 'Правка';
+  cView = 'Вид';
+  cHelp = 'Помощь';
+
+  cNormal = 'Обычная';
+  cHot = 'Наведенная';
+  cPressed = 'Нажатая';
+  cDisabled = 'Отключенная';
+
+  cBtnWidth = 75;
+  cBtnHeight = 25;
+  cBtnTop = 50;
+  cMarginLeft = 8;
+
+  cEdtWidth = 150;
+  cEdtText = '  Поле ввода';
+
+
+  cLableText = 'Надпись';
+  cLblWidth = 44;
+  cLblHeight = 20;
+
+  cChbWidth = 0;
+  cChbHeight = 21;
+  cChbText = '   Отмеченный крыжик';
+
+  crdbtnWidth = 0;
+  crdbtnHeight = 21;
+  crdbtnTextChk = '   Отмеченная кнопка';
+  crdbtnTextUnChk = '   Неотмеченная кнопка';
+
+  cprgsWidth = 200;
+  cprgsHeight = 26;
+  cprgsText = '    45%';
+
+  cTrkHeight = 25;
 var
   LDetails, CaptionDetails, IconDetails: TThemedElementDetails;
-  IconRect, BorderRect, CaptionRect, ButtonRect, TextRect: TRect;
+  IconRect, BorderRect, CaptionRect, ButtonRect, TextRect, LabelRect
+  , EditRect, chbRect, rdbRect, prgsRect, TrackRect: TRect;
   CaptionBitmap: TBitmap;
   ThemeTextColor: TColor;
   ARect, LRect: TRect;
   LRegion: HRGN;
   I: Integer;
+  k: Integer;
 
   function GetBorderSize: TRect;
   var
@@ -1644,11 +1686,6 @@ begin
         DeleteObject(LRegion);
     end;
 
-    {
-      Style.GetElementRegion(LDetails, ARect, Region);
-      SetWindowRgn(Handle, Region, True);
-    }
-
     DrawStyleElement(CaptionBitmap.Canvas.Handle, LDetails, CaptionRect, True, FStyle);
     TextRect := CaptionRect;
     CaptionDetails := LDetails;
@@ -1664,7 +1701,7 @@ begin
       DrawIconEx(CaptionBitmap.Canvas.Handle, IconRect.Left, IconRect.Top, FIcon, 0, 0, 0, 0, DI_NORMAL);
     Inc(TextRect.Left, ButtonRect.Width + 5);
 
-    // Draw buttons
+    // Draw system buttons
 
     // Close button
     LDetails := Style.GetElementDetails(twCloseButtonNormal);
@@ -1731,153 +1768,359 @@ begin
 
   // Draw Main Menu
   LDetails := Style.GetElementDetails(tmMenuBarBackgroundActive);
-  LRect := Rect(BorderRect.Left, BorderRect.Top + 1, ARect.Width - BorderRect.Left,BorderRect.Top + FBitmap.Canvas.TextHeight('Tq')+4);
+  LRect := Rect(BorderRect.Left, BorderRect.Top + 1, ARect.Width - BorderRect.Left,BorderRect.Top + FBitmap.Canvas.TextHeight('Tq') + 8);
   DrawStyleElement(FBitmap.Canvas.Handle, LDetails, LRect, True, FStyle);
 
   LDetails := Style.GetElementDetails(tmMenuBarItemNormal);
   Style.GetElementColor(LDetails, ecTextColor, ThemeTextColor);
-  CaptionRect := Rect(LRect.Left+10,LRect.Top+3, LRect.Left+10+FBitmap.Canvas.TextWidth('File') + 8 ,LRect.Bottom);
+  CaptionRect := Rect(LRect.Left+10,LRect.Top+3, LRect.Left+10+FBitmap.Canvas.TextWidth(cFile) + 8 ,LRect.Bottom);
   DrawStyleElement(FBitmap.Canvas.Handle, LDetails, CaptionRect, True, FStyle);
   FBitmap.Canvas.Font.Color := ThemeTextColor;
-  DrawText(FBitmap.Canvas, 'File', CaptionRect, DT_CENTER);
+  DrawText(FBitmap.Canvas, cFile, CaptionRect, DT_CENTER);
   CaptionRect.Left := CaptionRect.Right + 2;
 
-  CaptionRect.Right := CaptionRect.Left + FBitmap.Canvas.TextWidth('Edit') + 8;
+  CaptionRect.Right := CaptionRect.Left + FBitmap.Canvas.TextWidth(cEdit) + 8;
   LDetails := Style.GetElementDetails(tmMenuBarItemHot);
   Style.GetElementColor(LDetails, ecTextColor, ThemeTextColor);
   DrawStyleElement(FBitmap.Canvas.Handle, LDetails, CaptionRect, True, FStyle);
   FBitmap.Canvas.Font.Color := ThemeTextColor;
-  DrawText(FBitmap.Canvas, 'Edit', CaptionRect, DT_CENTER);
+  DrawText(FBitmap.Canvas, cEdit, CaptionRect, DT_CENTER);
   CaptionRect.Left := CaptionRect.Right + 2;
 
-  CaptionRect.Right := CaptionRect.Left + FBitmap.Canvas.TextWidth('View') + 8;
+  CaptionRect.Right := CaptionRect.Left + FBitmap.Canvas.TextWidth(cView) + 8;
   LDetails := Style.GetElementDetails(tmMenuBarItemNormal);
   Style.GetElementColor(LDetails, ecTextColor, ThemeTextColor);
   DrawStyleElement(FBitmap.Canvas.Handle, LDetails, CaptionRect, True, FStyle);
   FBitmap.Canvas.Font.Color := ThemeTextColor;
-  DrawText(FBitmap.Canvas, 'View', CaptionRect, DT_CENTER);
+  DrawText(FBitmap.Canvas, cView, CaptionRect, DT_CENTER);
   CaptionRect.Left := CaptionRect.Right + 2;
 
-  CaptionRect.Right := CaptionRect.Left + FBitmap.Canvas.TextWidth('Help') + 8;
+  CaptionRect.Right := CaptionRect.Left + FBitmap.Canvas.TextWidth(cHelp) + 8;
   LDetails := Style.GetElementDetails(tmMenuBarItemDisabled);
   Style.GetElementColor(LDetails, ecTextColor, ThemeTextColor);
   DrawStyleElement(FBitmap.Canvas.Handle, LDetails, CaptionRect, True, FStyle);
   FBitmap.Canvas.Font.Color := ThemeTextColor;
-  DrawText(FBitmap.Canvas, 'Help', CaptionRect, DT_CENTER);
+  DrawText(FBitmap.Canvas, cHelp, CaptionRect, DT_CENTER);
 
   // Draw ToolButtons
-  LDetails := Style.GetElementDetails(ttbButtonNormal);
-  Style.GetElementColor(LDetails, ecTextColor, ThemeTextColor);
-  ButtonRect.Left := BorderRect.Left + 2;
-  for i := 1 to 3 do
+  ButtonRect.Left := BorderRect.Left + cMarginLeft;
+  for i := 1 to 4 do
   begin
+    case i of
+      1: LDetails := Style.GetElementDetails(ttbButtonNormal);
+      2: LDetails := Style.GetElementDetails(ttbButtonHot);
+      3: LDetails := Style.GetElementDetails(ttbButtonPressed);
+      4: LDetails := Style.GetElementDetails(ttbButtonDisabled);
+    end;
+    Style.GetElementColor(LDetails, ecTextColor, ThemeTextColor);
+
     ButtonRect.Top := LRect.Top + 30;
     {$IF RTLVersion > 28}
     if Assigned(Application.Mainform) then
     begin
-      ButtonRect.Width := Round(65 * Application.MainForm.Monitor.PixelsPerInch / 96);
-      ButtonRect.Height := Round(25 * Application.MainForm.Monitor.PixelsPerInch / 96);
+      ButtonRect.Width := Round(cBtnWidth * Application.MainForm.Monitor.PixelsPerInch / 96);
+      ButtonRect.Height := Round(cBtnHeight * Application.MainForm.Monitor.PixelsPerInch / 96);
     end
     else
     {$IFEND}
     begin
-      ButtonRect.Width := Round(65 * Screen.PixelsPerInch / 96);
-      ButtonRect.Height := Round(25 * Screen.PixelsPerInch / 96);
+      ButtonRect.Width := Round(cBtnWidth * Screen.PixelsPerInch / 96);
+      ButtonRect.Height := Round(cBtnHeight * Screen.PixelsPerInch / 96);
     end;
 
     DrawStyleElement(FBitmap.Canvas.Handle, LDetails, ButtonRect, True, FStyle);
     Style.DrawText(FBitmap.Canvas.Handle, LDetails, 'ToolButton' + IntToStr(I), ButtonRect,
       TTextFormatFlags(DT_VCENTER or DT_CENTER), ThemeTextColor);
 
-    ButtonRect.Left := ButtonRect.Right + 2;
+    ButtonRect.Left := ButtonRect.Right + 4;
   end;
 
-  // Draw Normal
-  LDetails := Style.GetElementDetails(tbPushButtonNormal);
-  ButtonRect.Left := BorderRect.Left + 2;
-  ButtonRect.Top := ARect.Height - 45;
+  // Draw Tlabel control
+  LDetails := Style.GetElementDetails(ttlTextLabelNormal);
+  LabelRect.Left:= BorderRect.Left + cMarginLeft;
+  LabelRect.Top:= ButtonRect.Bottom + 20;
+
   {$IF RTLVersion > 28}
   if Assigned(Application.Mainform) then
   begin
-    ButtonRect.Width := Round(65 * Application.MainForm.Monitor.PixelsPerInch / 96);
-    ButtonRect.Height := Round(25 * Application.MainForm.Monitor.PixelsPerInch / 96);
+    LabelRect.Width := Round(cLblWidth * Application.MainForm.Monitor.PixelsPerInch / 96);
+    LabelRect.Height := Round(cLblHeight * Application.MainForm.Monitor.PixelsPerInch / 96);
   end
   else
   {$IFEND}
   begin
-    ButtonRect.Width := Round(65 * Screen.PixelsPerInch / 96);
-    ButtonRect.Height := Round(25 * Screen.PixelsPerInch / 96);
+    LabelRect.Width := Round(cLblWidth * Screen.PixelsPerInch / 96);
+    LabelRect.Height := Round(cLblHeight * Screen.PixelsPerInch / 96);
+  end;
+
+  DrawStyleElement(FBitmap.Canvas.Handle, LDetails, LabelRect, True, FStyle);
+
+  Style.GetElementColor(LDetails, ecTextColor, ThemeTextColor);
+  Style.DrawText(FBitmap.Canvas.Handle, LDetails, cLableText, LabelRect,
+    TTextFormatFlags(DT_LEFT or DT_VCENTER), ThemeTextColor);
+
+  //Draw TEdit control
+  LDetails := Style.GetElementDetails(teEditTextNormal);
+  EditRect.Left:= BorderRect.Left + cMarginLeft;
+  EditRect.Top:= LabelRect.Bottom;
+
+  {$IF RTLVersion > 28}
+  if Assigned(Application.Mainform) then
+  begin
+    EditRect.Width := Round(cEdtWidth * Application.MainForm.Monitor.PixelsPerInch / 96);
+    EditRect.Height := Round(cBtnHeight * Application.MainForm.Monitor.PixelsPerInch / 96);
+  end
+  else
+  {$IFEND}
+  begin
+    EditRect.Width := Round(cEdtWidth * Screen.PixelsPerInch / 96);
+    EditRect.Height := Round(cBtnHeight * Screen.PixelsPerInch / 96);
+  end;
+
+  DrawStyleElement(FBitmap.Canvas.Handle, LDetails, EditRect, True, FStyle);
+
+  Style.GetElementColor(LDetails, ecTextColor, ThemeTextColor);
+  Style.DrawText(FBitmap.Canvas.Handle, LDetails, cEdtText, EditRect, TTextFormatFlags(DT_LEFT or DT_VCENTER),
+    ThemeTextColor);
+
+  //Draw TCheckBox control
+  LDetails := Style.GetElementDetails(tbCheckBoxCheckedPressed);
+  chbRect.Left:= EditRect.Left + 9;
+  chbRect.Top:= EditRect.Bottom + 6;
+
+  {$IF RTLVersion > 28}
+  if Assigned(Application.Mainform) then
+  begin
+    chbRect.Width := Round(cChbWidth * Application.MainForm.Monitor.PixelsPerInch / 96);
+    chbRect.Height := Round(cChbHeight * Application.MainForm.Monitor.PixelsPerInch / 96);
+  end
+  else
+  {$IFEND}
+  begin
+    chbRect.Width := Round(cChbWidth * Screen.PixelsPerInch / 96);
+    chbRect.Height := Round(cChbHeight * Screen.PixelsPerInch / 96);
+  end;
+
+  DrawStyleElement(FBitmap.Canvas.Handle, LDetails, chbRect, True, FStyle);
+
+  Style.GetElementColor(LDetails, ecTextColor, ThemeTextColor);
+  Style.DrawText(FBitmap.Canvas.Handle, LDetails, cChbText, chbRect,
+    TTextFormatFlags(DT_VCENTER or DT_LEFT), ThemeTextColor);
+
+  //Draw TRadioButton control
+  //radiobutton checked
+  LDetails := Style.GetElementDetails(tbRadioButtonCheckedNormal);
+  rdbRect.Left:= BorderRect.Left + 2 * cMarginLeft;
+  rdbRect.Top:= chbRect.Bottom + 8;
+
+  {$IF RTLVersion > 28}
+  if Assigned(Application.Mainform) then
+  begin
+    rdbRect.Width := Round(crdbtnWidth * Application.MainForm.Monitor.PixelsPerInch / 96);
+    rdbRect.Height := Round(crdbtnHeight * Application.MainForm.Monitor.PixelsPerInch / 96);
+  end
+  else
+  {$IFEND}
+  begin
+    rdbRect.Width := Round(crdbtnWidth * Screen.PixelsPerInch / 96);
+    rdbRect.Height := Round(crdbtnHeight * Screen.PixelsPerInch / 96);
+  end;
+
+  DrawStyleElement(FBitmap.Canvas.Handle, LDetails, rdbRect, True, FStyle);
+
+  Style.GetElementColor(LDetails, ecTextColor, ThemeTextColor);
+  Style.DrawText(FBitmap.Canvas.Handle, LDetails, crdbtnTextChk, rdbRect,
+    TTextFormatFlags(DT_LEFT or DT_VCENTER), ThemeTextColor);
+
+  //radiobutton Unchecked
+  LDetails := Style.GetElementDetails(tbRadioButtonUncheckedNormal);
+  rdbRect.Left:= BorderRect.Left + 2 * cMarginLeft;
+  rdbRect.Top:= rdbRect.Bottom;
+
+  {$IF RTLVersion > 28}
+  if Assigned(Application.Mainform) then
+  begin
+    rdbRect.Width := Round(crdbtnWidth * Application.MainForm.Monitor.PixelsPerInch / 96);
+    rdbRect.Height := Round(crdbtnHeight * Application.MainForm.Monitor.PixelsPerInch / 96);
+  end
+  else
+  {$IFEND}
+  begin
+    rdbRect.Width := Round(crdbtnWidth * Screen.PixelsPerInch / 96);
+    rdbRect.Height := Round(crdbtnHeight * Screen.PixelsPerInch / 96);
+  end;
+
+  DrawStyleElement(FBitmap.Canvas.Handle, LDetails, rdbRect, True, FStyle);
+
+  Style.GetElementColor(LDetails, ecTextColor, ThemeTextColor);
+  Style.DrawText(FBitmap.Canvas.Handle, LDetails, crdbtnTextUnChk, rdbRect,
+    TTextFormatFlags(DT_LEFT or DT_VCENTER), ThemeTextColor);
+
+  //Draw TProgressBar control
+  LDetails := Style.GetElementDetails(tpChunk);
+  prgsRect.Left := BorderRect.Left + cMarginLeft;
+  prgsRect.Top := rdbRect.Bottom + 20;
+
+  {$IF RTLVersion > 28}
+  if Assigned(Application.Mainform) then
+  begin
+    prgsRect.Width := Round(cprgsWidth * Application.MainForm.Monitor.PixelsPerInch / 96);
+    prgsRect.Height := Round(cprgsHeight * Application.MainForm.Monitor.PixelsPerInch / 96);
+  end
+  else
+  {$IFEND}
+  begin
+    prgsRect.Width := Round(cprgsWidth * Screen.PixelsPerInch / 96);
+    prgsRect.Height := Round(cprgsHeight * Screen.PixelsPerInch / 96);
+  end;
+
+  DrawStyleElement(FBitmap.Canvas.Handle, LDetails, prgsRect, True, FStyle);
+
+  Style.GetElementColor(LDetails, ecTextColor, ThemeTextColor);
+  Style.DrawText(FBitmap.Canvas.Handle, LDetails, '', prgsRect,
+    TTextFormatFlags(DT_VCENTER), ThemeTextColor);
+
+  LDetails := Style.GetElementDetails(tpBar);
+  prgsRect.Left := prgsRect.Right - 2;
+  prgsRect.Top := prgsRect.Top - 1;
+
+  {$IF RTLVersion > 28}
+  if Assigned(Application.Mainform) then
+  begin
+    prgsRect.Width := Round((LRect.Right - cprgsWidth - 16 * cMarginLeft) * Application.MainForm.Monitor.PixelsPerInch / 96);
+    prgsRect.Height := Round((cprgsHeight + 1) * Application.MainForm.Monitor.PixelsPerInch / 96);
+  end
+  else
+  {$IFEND}
+  begin
+    prgsRect.Width := Round((LRect.Right - cprgsWidth - 16 * cMarginLeft) * Screen.PixelsPerInch / 96);
+    prgsRect.Height := Round((cprgsHeight + 1) * Screen.PixelsPerInch / 96);
+  end;
+
+  DrawStyleElement(FBitmap.Canvas.Handle, LDetails, prgsRect, True, FStyle);
+
+  Style.GetElementColor(LDetails, ecTextColor, ThemeTextColor);
+  Style.DrawText(FBitmap.Canvas.Handle, LDetails, cprgsText, prgsRect,
+    TTextFormatFlags(DT_VCENTER), ThemeTextColor);
+
+  //Draw TTrackBar control
+  LDetails := Style.GetElementDetails(ttbTrack);
+  TrackRect.Left := LRect.Left + cMarginLeft;
+  TrackRect.Top := prgsRect.Bottom + 20;
+
+  k:= LRect.Right - 16 * cMarginLeft;
+
+  {$IF RTLVersion > 28}
+  if Assigned(Application.Mainform) then
+  begin
+    TrackRect.Width := Round((LRect.Right - 16 * cMarginLeft) * Application.MainForm.Monitor.PixelsPerInch / 96);
+    TrackRect.Height := Round(cTrkHeight * Application.MainForm.Monitor.PixelsPerInch / 96);
+  end
+  else
+  {$IFEND}
+  begin
+    TrackRect.Width := Round((LRect.Right - 16 * cMarginLeft) * Screen.PixelsPerInch / 96);
+    TrackRect.Height := Round(cTrkHeight * Screen.PixelsPerInch / 96);
+  end;
+
+  DrawStyleElement(FBitmap.Canvas.Handle, LDetails, TrackRect, True, FStyle);
+  Style.GetElementColor(LDetails, ecTextColor, ThemeTextColor);
+
+  LDetails := Style.GetElementDetails(ttbThumbNormal);
+  TrackRect.Left := ARect.Left + cMarginLeft div 3;
+  TrackRect.Top := prgsRect.Bottom + 20;
+
+  DrawStyleElement(FBitmap.Canvas.Handle, LDetails, TrackRect, True, FStyle);
+  Style.GetElementColor(LDetails, ecTextColor, ThemeTextColor);
+
+
+  //Draw TButton controls
+  // Draw Normal
+  LDetails := Style.GetElementDetails(ttbThumbTicsVert);
+  ButtonRect.Left := BorderRect.Left + cMarginLeft;
+  ButtonRect.Top := ARect.Height - cBtnTop;
+  {$IF RTLVersion > 28}
+  if Assigned(Application.Mainform) then
+  begin
+    ButtonRect.Width := Round(cBtnWidth * Application.MainForm.Monitor.PixelsPerInch / 96);
+    ButtonRect.Height := Round(cBtnHeight * Application.MainForm.Monitor.PixelsPerInch / 96);
+  end
+  else
+  {$IFEND}
+  begin
+    ButtonRect.Width := Round(cBtnWidth * Screen.PixelsPerInch / 96);
+    ButtonRect.Height := Round(cBtnHeight * Screen.PixelsPerInch / 96);
   end;
   DrawStyleElement(FBitmap.Canvas.Handle, LDetails, ButtonRect, True, FStyle);
 
   Style.GetElementColor(LDetails, ecTextColor, ThemeTextColor);
-  Style.DrawText(FBitmap.Canvas.Handle, LDetails, 'Normal', ButtonRect, TTextFormatFlags(DT_VCENTER or DT_CENTER),
+  Style.DrawText(FBitmap.Canvas.Handle, LDetails, cNormal, ButtonRect, TTextFormatFlags(DT_VCENTER or DT_CENTER),
     ThemeTextColor);
 
   // Draw Hot
   LDetails := Style.GetElementDetails(tbPushButtonHot);
-  ButtonRect.Left := ButtonRect.Right + 2;
-  ButtonRect.Top := ARect.Height - 45;
+  ButtonRect.Left := ButtonRect.Right + cMarginLeft;
+  ButtonRect.Top := ARect.Height - cBtnTop;
   {$IF RTLVersion > 28}
   if Assigned(Application.Mainform) then
   begin
-    ButtonRect.Width := Round(65 * Application.MainForm.Monitor.PixelsPerInch / 96);
-    ButtonRect.Height := Round(25 * Application.MainForm.Monitor.PixelsPerInch / 96);
+    ButtonRect.Width := Round(cBtnWidth * Application.MainForm.Monitor.PixelsPerInch / 96);
+    ButtonRect.Height := Round(cBtnHeight * Application.MainForm.Monitor.PixelsPerInch / 96);
   end
   else
   {$IFEND}
   begin
-    ButtonRect.Width := Round(65 * Screen.PixelsPerInch / 96);
-    ButtonRect.Height := Round(25 * Screen.PixelsPerInch / 96);
+    ButtonRect.Width := Round(cBtnWidth * Screen.PixelsPerInch / 96);
+    ButtonRect.Height := Round(cBtnHeight * Screen.PixelsPerInch / 96);
   end;
   DrawStyleElement(FBitmap.Canvas.Handle, LDetails, ButtonRect, True, FStyle);
 
   Style.GetElementColor(LDetails, ecTextColor, ThemeTextColor);
-  Style.DrawText(FBitmap.Canvas.Handle, LDetails, 'Hot', ButtonRect, TTextFormatFlags(DT_VCENTER or DT_CENTER),
+  Style.DrawText(FBitmap.Canvas.Handle, LDetails, cHot, ButtonRect, TTextFormatFlags(DT_VCENTER or DT_CENTER),
     ThemeTextColor);
 
   // Draw Pressed
   LDetails := Style.GetElementDetails(tbPushButtonPressed);
-  ButtonRect.Left := ButtonRect.Right + 2;
-  ButtonRect.Top := ARect.Height - 45;
+  ButtonRect.Left := ButtonRect.Right + cMarginLeft;
+  ButtonRect.Top := ARect.Height - cBtnTop;
   {$IF RTLVersion > 28}
   if Assigned(Application.Mainform) then
   begin
-    ButtonRect.Width := Round(65 * Application.MainForm.Monitor.PixelsPerInch / 96);
-    ButtonRect.Height := Round(25 * Application.MainForm.Monitor.PixelsPerInch / 96);
+    ButtonRect.Width := Round(cBtnWidth * Application.MainForm.Monitor.PixelsPerInch / 96);
+    ButtonRect.Height := Round(cBtnHeight * Application.MainForm.Monitor.PixelsPerInch / 96);
   end
   else
   {$IFEND}
   begin
-    ButtonRect.Width := Round(65 * Screen.PixelsPerInch / 96);
-    ButtonRect.Height := Round(25 * Screen.PixelsPerInch / 96);
+    ButtonRect.Width := Round(cBtnWidth * Screen.PixelsPerInch / 96);
+    ButtonRect.Height := Round(cBtnHeight * Screen.PixelsPerInch / 96);
   end;
   DrawStyleElement(FBitmap.Canvas.Handle, LDetails, ButtonRect, True, FStyle);
 
   Style.GetElementColor(LDetails, ecTextColor, ThemeTextColor);
-  Style.DrawText(FBitmap.Canvas.Handle, LDetails, 'Pressed', ButtonRect, TTextFormatFlags(DT_VCENTER or DT_CENTER),
+  Style.DrawText(FBitmap.Canvas.Handle, LDetails, cPressed, ButtonRect, TTextFormatFlags(DT_VCENTER or DT_CENTER),
     ThemeTextColor);
 
   // Draw Disabled
   LDetails := Style.GetElementDetails(tbPushButtonDisabled);
-  ButtonRect.Left := ButtonRect.Right + 2;
-  ButtonRect.Top := ARect.Height - 45;
+  ButtonRect.Left := ButtonRect.Right + cMarginLeft;
+  ButtonRect.Top := ARect.Height - cBtnTop;
   {$IF RTLVersion > 28}
   if Assigned(Application.Mainform) then
   begin
-    ButtonRect.Width := Round(65 * Application.MainForm.Monitor.PixelsPerInch / 96);
-    ButtonRect.Height := Round(25 * Application.MainForm.Monitor.PixelsPerInch / 96);
+    ButtonRect.Width := Round(cBtnWidth * Application.MainForm.Monitor.PixelsPerInch / 96);
+    ButtonRect.Height := Round(cBtnHeight * Application.MainForm.Monitor.PixelsPerInch / 96);
   end
   else
   {$IFEND}
   begin
-    ButtonRect.Width := Round(65 * Screen.PixelsPerInch / 96);
-    ButtonRect.Height := Round(25 * Screen.PixelsPerInch / 96);
+    ButtonRect.Width := Round(cBtnWidth * Screen.PixelsPerInch / 96);
+    ButtonRect.Height := Round(cBtnHeight * Screen.PixelsPerInch / 96);
   end;
   DrawStyleElement(FBitmap.Canvas.Handle, LDetails, ButtonRect, True, FStyle);
 
   Style.GetElementColor(LDetails, ecTextColor, ThemeTextColor);
-  Style.DrawText(FBitmap.Canvas.Handle, LDetails, 'Disabled', ButtonRect, TTextFormatFlags(DT_VCENTER or DT_CENTER),
+  Style.DrawText(FBitmap.Canvas.Handle, LDetails, cDisabled, ButtonRect, TTextFormatFlags(DT_VCENTER or DT_CENTER),
     ThemeTextColor);
 
   Canvas.Draw(0, 0, FBitmap);

@@ -76,10 +76,14 @@ begin
   end;
 
   if not SameText(cbbThemesList.Items[cbbThemesList.ItemIndex],TStyleManager.cSystemStyleName)
-    then FPreview.Style:= TStyleManager.Style[cbbThemesList.Items[cbbThemesList.ItemIndex]];
+  then
+    FPreview.Style:= TStyleManager.Style[cbbThemesList.Items[cbbThemesList.ItemIndex]]
+  else
+    FPreview.Style:= TStyleManager.Style[TStyleManager.cSystemStyleName];
 
   FPreview.Caption:= cbbThemesList.Items[cbbThemesList.ItemIndex];
   TVclStylesPreviewClass(FPreview).Paint;
+
 
   Self.Caption:= TStyleManager.ActiveStyle.Name;
 end;
@@ -122,12 +126,13 @@ begin
   cbbThemesList.Clear;
   GetAvailableStyles(FStylesList);
 
-  if (StylesList.Count > 0)  then
-  begin
-    cbbThemesList.Items.Assign(StylesList);
-    cbbThemesList.ItemIndex:= 0;
-    cbbThemesListChange(Sender);
-  end;
+  if (StylesList.Count > 0)
+    then cbbThemesList.Items.Assign(StylesList)
+    else cbbThemesList.Items.Add(TStyleManager.cSystemStyleName);
+
+  cbbThemesList.ItemIndex:= 0;
+  cbbThemesListChange(Sender);
+    ;
 end;
 
 procedure TForm1.GetAvailableStyles(Sender: TStrings);
@@ -136,7 +141,7 @@ https://stackoverflow.com/questions/8619161/how-can-i-get-the-style-name-of-a-vs
 https://stackoverflow.com/questions/7386007/delphi-xe2-reloading-a-custom-vcl-style-from-file
 }
 const
-  StylesPath = 'c:\proj\delphi_themes\theme_styles\';
+  StylesPath = 'c:\proj\delphi_themes\theme_styles';
   StylesExt = '*.vsf';
 var
   fn: string;
@@ -144,33 +149,17 @@ var
   SL: TStringList;
 begin
   TStrings(Sender).Clear;
-  TStrings(Sender).Add(TStyleManager.cSystemStyleName);
   SL:= TStringList.Create;
   try
-    for fn in TDirectory.GetFiles(StylesPath, StylesExt) do
-      if TStyleManager.IsValidStyle(fn) then TStyleManager.LoadFromFile(fn);
+    if DirectoryExists(StylesPath) then
+      for fn in TDirectory.GetFiles(StylesPath, StylesExt) do
+        if TStyleManager.IsValidStyle(fn) then TStyleManager.LoadFromFile(fn);
 
-      for i := 0 to Pred(System.Length(TStyleManager.StyleNames)) do
-        if not SameText(TStyleManager.cSystemStyleName,TStyleManager.StyleNames[i])
-          then TStrings(Sender).Add(TStyleManager.StyleNames[i]);
+    for i := 0 to Pred(System.Length(TStyleManager.StyleNames)) do
+      if not SameText(TStyleManager.cSystemStyleName,TStyleManager.StyleNames[i])
+        then TStrings(Sender).Add(TStyleManager.StyleNames[i]);
   finally
     SL.Free;
-  end;
-
-  for fn in TDirectory.GetFiles(StylesPath, StylesExt) do
-  begin
-//    Sender.Add(fn);
-//    TStyleManager.LoadFromFile(fn);
-//    for StyleName in TStyleManager.StyleNames do
-//    begin
-//      SourceInfo:=TStyleManager.StyleSourceInfo[StyleName];
-//      VCLStyleExt:=TCustomStyleExt.Create(TStream(SourceInfo.Data));
-//      StyleInfo  :=TCustomStyleExt(VCLStyleExt).StyleInfo;
-//      Sender.Add(StyleInfo.Name + '|' + fn);
-//      VCLStyleExt.Free;
-//    end;
-//    TStyleManager.RemoveStyle(StyleInfo.Name);
-
   end;
 end;
 
